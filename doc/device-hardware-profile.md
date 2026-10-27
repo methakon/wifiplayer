@@ -130,3 +130,21 @@ The chip was reset during bootloader probes and the final UART capture. After th
 - Measured power consumption, electrical condition and peripheral functionality.
 
 A photograph of both sides and module/PCB markings can help identify the physical board. Firmware-assisted diagnostics or a board schematic are needed for a fuller peripheral and memory inventory. Existing firmware and hardware have been preserved.
+
+## Board identity: reported but not verified here
+
+A desktop review in [wifiplayer-repository-findings.md](wifiplayer-repository-findings.md) reports a board photo with silkscreen `ESP32-2432S028` (2.8-inch 240x320 LVGL touch board, USB-C plus Micro-USB). That review is a document/photo study; this profile was produced from live probes of the attached device only, so the model is **reported, not device-verified**. Nothing in the chip-level data above contradicts it: ESP32-D0WD-V3, 4 MB flash and a CH340 bridge are all consistent with that board class.
+
+That model is commonly sold with **no PSRAM**, an SPI display (ST7789 or ILI9341 depending on batch), a resistive XPT2046 touch controller and a small on-board speaker header. Each of those is a per-batch property and must be confirmed on this unit, not assumed.
+
+Cheapest way to convert each unknown into evidence:
+
+| Unknown | How to verify without guessing |
+|---|---|
+| PSRAM present / size | Flash a MicroPython `ESP32_GENERIC-SPIRAM` build and read the reported PSRAM size; a non-SPIRAM build boots either way, so absence of a size is weak evidence unless the SPIRAM build is used |
+| Display controller and resolution | Run an LVGL/ST7789 or ILI9341 driver init over the board's SPI pins and look for correct orientation and colour test pattern on the panel |
+| Touch controller | Read XPT2046 raw coordinates while pressing the panel; confirm they track the touch position |
+| Audio | Trace the speaker header and amplifier markings against the schematic, then play a tone and confirm audible output |
+| Board model / revision | Photograph both PCB sides; read the silkscreen and any module label |
+
+No firmware, Wi-Fi credentials or flash contents are published here; the full 4 MB flash image stays local.
