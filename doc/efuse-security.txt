@@ -1,0 +1,37 @@
+Command: uv tool run --from esptool espefuse --chip esp32 --port /dev/ttyUSB0 --baud 115200 summary FLASH_CRYPT_CNT ABS_DONE_0 ABS_DONE_1 JTAG_DISABLE DISABLE_DL_ENCRYPT DISABLE_DL_DECRYPT DISABLE_DL_CACHE CHIP_VER_REV1 CHIP_VER_REV2 CHIP_VERSION_PACKAGE DISABLE_APP_CPU DISABLE_BT CHIP_CPU_FREQ_RATED CHIP_CPU_FREQ_LOW
+
+espefuse v5.6.0
+Connecting......
+
+=== Run "summary" command ===
+EFUSE_NAME (Block) Description  = [Meaningful Value] [Readable/Writeable] (Hex Value)
+----------------------------------------------------------------------------------------
+Config fuses:
+DISABLE_APP_CPU (BLOCK0)                           Disables APP CPU                                   = False R/W (0b0)
+DISABLE_BT (BLOCK0)                                Disables Bluetooth                                 = False R/W (0b0)
+CHIP_CPU_FREQ_LOW (BLOCK0)                         If set alongside EFUSE_RD_CHIP_CPU_FREQ_RATED; the = False R/W (0b0)
+                                                    ESP32's max CPU frequency is rated for 160MHz. 24
+                                                   0MHz otherwise                                    
+CHIP_CPU_FREQ_RATED (BLOCK0)                       If set; the ESP32's maximum CPU frequency has been = True R/W (0b1)
+                                                    rated                                            
+DISABLE_DL_CACHE (BLOCK0)                          Disable flash cache in UART bootloader             = False R/W (0b0)
+
+Flash fuses:
+FLASH_CRYPT_CNT (BLOCK0)                           Flash encryption is enabled if this field has an o = 0 R/W (0b0000000)
+                                                   dd number of bits set                             
+
+Identity fuses:
+CHIP_VER_REV1 (BLOCK0)                             bit is set to 1 for rev1 silicon                   = True R/W (0b1)
+CHIP_VER_REV2 (BLOCK0)                                                                                = True R/W (0b1)
+
+Jtag fuses:
+JTAG_DISABLE (BLOCK0)                              Disable JTAG                                       = False R/W (0b0)
+
+Security fuses:
+ABS_DONE_0 (BLOCK0)                                Secure boot V1 is enabled for bootloader image     = False R/W (0b0)
+ABS_DONE_1 (BLOCK0)                                Secure boot V2 is enabled for bootloader image     = False R/W (0b0)
+DISABLE_DL_ENCRYPT (BLOCK0)                        Disable flash encryption in UART bootloader        = False R/W (0b0)
+DISABLE_DL_DECRYPT (BLOCK0)                        Disable flash decryption in UART bootloader        = False R/W (0b0)
+
+Flash voltage (VDD_SDIO) determined by GPIO12 on reset (High for 1.8V, Low/NC for 3.3V)
+Exit code: 0
