@@ -1,0 +1,7 @@
+IRQ_SCAN_RESULT None
+IRQ_SCAN_DONE None
+active True
+config (0, b'$\xdc\xc3\xcd\x0fJ')
+PASS passive_100 events {6: 1} results 0
+PASS active_100 events {6: 2} results 0
+TOTAL 0

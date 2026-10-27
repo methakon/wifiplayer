@@ -1,0 +1,5 @@
+backup/
+fw/
+*.bin
+*.log
+!doc/*.log

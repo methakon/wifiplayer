@@ -1,0 +1,3 @@
+AP_COUNT 2
+AP ssid='Airtel_Dhar' bssid=b'\x08\xaa\x89\xa7z\xe6' ch=6 rssi=-53 auth=4 hidden=0
+AP ssid='kusankurdhar' bssid=b'P\x0f\xf5\x7f=1' ch=6 rssi=-91 auth=4 hidden=0

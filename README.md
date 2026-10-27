@@ -5,9 +5,12 @@ Hardware documentation for the ESP32 board used in this project.
 ## Contents
 
 - [doc/device-hardware-profile.md](doc/device-hardware-profile.md) — full hardware profile: silicon, flash, USB/serial interface, read-only security state, boot behavior and known limits.
+- [doc/bluetooth-scan.md](doc/bluetooth-scan.md) — Bluetooth/BLE scan attempt on the ESP32: method, results, cross-checks and what remains unproven.
 - `doc/chip-and-flash.txt` — captured `esptool flash-id` output.
 - `doc/efuse-security.txt` — captured read-only eFuse summary (selection only, no key blocks).
 - `doc/usb-properties.txt` — captured udev properties and device paths.
+- `doc/ble-*.log`, `doc/wifi-scan-evidence.log` — raw serial output from the scan runs.
+- `scripts/` — MicroPython scripts used for the BLE/Wi-Fi tests (run with `mpremote`).
 
 ## Summary
 
@@ -17,10 +20,12 @@ Hardware documentation for the ESP32 board used in this project.
 | CPU | Dual core, rated 240 MHz |
 | Crystal | 40 MHz |
 | Flash | 4 MB |
-| MAC | `24:dc:c3:cd:0f:48` |
+| MAC | `24:dc:c3:cd:0f:48` (BLE: `24:dc:c3:cd:0f:4a`) |
 | UART bridge | CH340 (`1a86:7523`) on `/dev/ttyUSB0` |
 | Secure boot / flash encryption | Not enabled |
 | Existing firmware | Arduino + LVGL sketch, boot reported "Setup done" |
+| BLE | Advertises and is received; scan completes, 0 advertisers in range |
+| Classic Bluetooth | Not testable from MicroPython |
 
 Board model, PSRAM, display/touch and audio hardware are not yet verified — see the "Remaining unknowns" section of the profile.
 
@@ -35,4 +40,4 @@ espefuse --chip esp32 --port /dev/ttyUSB0 --baud 115200 summary
 udevadm info --query=property --name=/dev/ttyUSB0
 ```
 
-Read-only probes. Do not run `erase-flash` or burn eFuses unless you intend to.
+Bluetooth tests need MicroPython flashed temporarily; see [doc/bluetooth-scan.md](doc/bluetooth-scan.md) for the full backup/flash/restore sequence. Otherwise these are read-only probes: do not run `erase-flash` or burn eFuses unless you intend to.
